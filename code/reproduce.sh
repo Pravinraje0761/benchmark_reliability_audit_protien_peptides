@@ -101,12 +101,22 @@ python scripts/make_figures.py
 say "10. manuscript: substitute numbers, assemble, gate"
 # Numbers are substituted mechanically from the CSVs rather than transcribed by
 # hand, so the prose cannot drift from the artefacts it reports.
-python scripts/fill_results.py --apply
-python scripts/assemble_manuscript.py
+# These two scripts operate on the author's Markdown manuscript drafts in
+# ../Projects/BRA/manuscript/, which are not part of this repository. The
+# released manuscript is ../paper/main.tex; every number it reports is in
+# ../results/tables/. Skip cleanly when the drafts are absent.
+if [ -d ../Projects/BRA/manuscript ]; then
+  python scripts/fill_results.py --apply
+  python scripts/assemble_manuscript.py
+  MANUSCRIPT_NOTE="manuscript -> ../Projects/BRA/manuscript/MANUSCRIPT.md"
+else
+  echo "Manuscript drafts not present; skipping (released manuscript: ../paper/main.tex)."
+  MANUSCRIPT_NOTE="manuscript -> ../paper/main.tex (compile with pdflatex, twice)"
+fi
 
 say "done"
 echo "tables     -> ../results/tables"
 echo "figures    -> ../results/figures"
-echo "manuscript -> ../Projects/BRA/manuscript/MANUSCRIPT.md"
+echo "$MANUSCRIPT_NOTE"
 echo
 echo "The submission gate above lists anything still outstanding."
