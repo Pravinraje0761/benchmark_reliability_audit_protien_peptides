@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    name: Tests (no benchmark data needed)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: code
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: code/requirements.txt
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Every module compiles
+        run: python -m compileall -q bra scripts tests
+
+      - name: Tests
+        run: python -m pytest
+
+  paper:
+    name: Manuscript compiles
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install LaTeX
+        run: sudo apt-get update -q && sudo apt-get install -y -q --no-install-recommends texlive-latex-extra texlive-fonts-recommended texlive-science lmodern
+      - name: Compile main and supplementary (twice each, for cross-references)
+        working-directory: paper
+        run: |
+          for doc in main supplementary; do
+            pdflatex -interaction=nonstopmode -halt-on-error -output-directory=/tmp "$doc" > /dev/null
+            pdflatex -interaction=nonstopmode -halt-on-error -output-directory=/tmp "$doc" > /dev/null
+            echo "$doc: $(grep -c 'Overfull\|Underfull' /tmp/$doc.log) overfull/underfull boxes"
+          done

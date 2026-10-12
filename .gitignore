@@ -1,7 +1,10 @@
 # Regenerable or non-redistributable data. The Arm B corpus derives from DBAASP
 # and UniProt, whose terms govern redistribution; reproduce.sh rebuilds it from
 # hashed inputs instead.
-data/
+# Anchored on purpose: a bare `data/` also matches the code package
+# code/bra/data/, which must be committed.
+/data/
+/code/data/
 *.parquet
 *.fasta
 *.fa
