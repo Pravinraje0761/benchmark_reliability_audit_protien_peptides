@@ -1,0 +1,28 @@
+# Arm B factorial. Balanced by construction, which makes the crossed
+# random-effects ANOVA exact -- see Projects/BRA/05 Analysis plan.md.
+arm_b:
+  cluster_threshold: [random, "0.9", "0.7", "0.4"]
+  negative_rule:
+    - random_uniprot
+    - length_matched
+    - composition_matched
+    - shuffled_positives
+    - curated
+  seeds: [0, 1, 2, 3, 4]
+  n_folds: 5
+  coverage: 0.8          # report this; it is routinely omitted and it matters
+  cov_mode: 0
+  sensitivity: 7.5       # raised above default: short peptides need it
+
+  # Metrics are computed downstream from stored predictions, so they cost
+  # nothing extra and every metric sees identical predictions.
+  metrics: [auroc, auprc, mcc, bacc, f1]
+  primary_metric: mcc
+
+sensitivity_arms:
+  cluster_threshold: [kmer_jaccard_0.5, leave_source_out]
+
+staging:
+  pilot:     {models: [M01, M09, M12], note: "validates harness, sizes the seed count"}
+  classical: {models: [M01, M02, M03, M04, M07, M08, M09, M10, M11, M12]}
+  deep:      {models: [M05, M06], note: "GPU, run last"}

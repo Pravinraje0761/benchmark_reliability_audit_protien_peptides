@@ -1,0 +1,23 @@
+# Python 3.11 or 3.12. NOT 3.14 -- torch and transformers wheels lag badly.
+numpy>=1.26,<3
+pandas>=2.1
+scipy>=1.11
+scikit-learn>=1.4
+pyarrow>=15          # parquet
+statsmodels>=0.14    # REML sensitivity check on the variance decomposition
+xgboost>=2.0         # M03
+matplotlib>=3.8
+seaborn>=0.13
+pyyaml>=6.0
+tqdm>=4.66
+
+# PLM pipelines (M07-M11). Install only when running those sweeps.
+# torch>=2.2
+# transformers>=4.40
+# sentencepiece      # required by ProtT5 tokenizer
+
+# External, not pip-installable:
+#   mmseqs2  -- conda install -c bioconda mmseqs2   (WSL2 or Docker on Windows)
+
+# Dev / test. Without this, a bare `pytest` resolves to the system interpreter.
+pytest>=8.0

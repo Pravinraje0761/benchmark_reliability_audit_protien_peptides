@@ -1,0 +1,17 @@
+task,desc,n_train,n_test,dups,dup_pct,both_tr,both_te,used
+AB,antibacterial,13245,3311,77,2.3255813953488373,295,31,True
+AMP,antimicrobial,10266,2566,0,0.0,7,0,True
+AV,antiviral,4711,1177,117,9.940526762956669,1,0,True
+Neuro,neuropeptide,3881,969,10,1.0319917440660475,24,2,True
+TOX,toxicity,3092,772,0,0.0,29,0,True
+ACE,ACE-inhibitory,1685,421,26,6.175771971496437,33,3,True
+AF,antifungal,1591,395,8,2.0253164556962027,6,0,True
+ACP,anticancer,1378,344,15,4.3604651162790695,0,0,True
+DPPIV,DPP-IV inhibitory,1063,265,16,6.037735849056604,29,3,True
+TTCA,tumour T-cell antigen,948,236,46,19.491525423728813,0,0,True
+AOX,antioxidant,698,174,12,6.896551724137931,13,0,False
+APP,anti-parasitic,482,120,6,5.0,0,0,False
+QS,quorum sensing,349,87,0,0.0,0,0,False
+MRSA,anti-MRSA,237,59,3,5.084745762711864,0,0,False
+AMAP,anti-MAP,221,55,0,0.0,0,1,False
+BBP,blood-brain barrier,191,47,0,0.0,0,0,False

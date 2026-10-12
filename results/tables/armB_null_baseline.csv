@@ -1,0 +1,6 @@
+negative_rule,score,rank
+annotation_filtered,0.7646653333461322,15.0
+composition_matched,0.23874243745845591,16.0
+length_matched,0.3610490817665343,16.0
+random_uniprot,0.7678871241747466,15.0
+shuffled_positives,-0.0038533325921745612,15.0
