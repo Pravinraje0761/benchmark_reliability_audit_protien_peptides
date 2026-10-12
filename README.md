@@ -1,5 +1,12 @@
 # Benchmark reliability audit: peptide property prediction
 
+[![CI](https://github.com/Pravinraje0761/benchmark_reliability_audit_protien_peptides/actions/workflows/ci.yml/badge.svg)](https://github.com/Pravinraje0761/benchmark_reliability_audit_protien_peptides/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+![Python 3.11](https://img.shields.io/badge/python-3.11%20%7C%203.12-blue.svg)
+![Paper: manuscript](https://img.shields.io/badge/paper-manuscript-lightgrey.svg)
+
+**[Read the manuscript (PDF)](paper/main.pdf)** · [Supplementary material](paper/supplementary.pdf) · [Analysis plan and deviations log](paper/preregistration.md)
+
 Code, manuscript and results for a factorial audit of evaluation design in
 peptide property prediction — asking not whether leakage-controlled benchmarks
 report the right *level* of performance, but whether they agree on the *ranking*
@@ -101,5 +108,26 @@ removed, in the manuscript and in `paper/preregistration.md`:
 ## Status
 
 The manuscript is not yet submitted and the data deposit is pending; the
-availability section carries a placeholder DOI. No licence is declared yet —
-add one before reuse.
+availability section carries a placeholder for the deposit identifier. Remaining
+author-side items are listed in [`paper/SUBMISSION_CHECKLIST.md`](paper/SUBMISSION_CHECKLIST.md).
+
+## Citation
+
+The manuscript is not yet published. Until it is, please cite the software:
+
+```bibtex
+@software{pravinraj_bra_2026,
+  author = {Pravin Raj E},
+  title  = {Benchmark Reliability Audit: Peptide Property Prediction (code)},
+  year   = {2026},
+  url    = {https://github.com/Pravinraje0761/benchmark_reliability_audit_protien_peptides}
+}
+```
+
+GitHub's "Cite this repository" button uses [`CITATION.cff`](CITATION.cff).
+
+## License
+
+Code is released under the [MIT License](LICENSE). The Arm A datasets and the
+sources of the Arm B corpus (DBAASP, UniProt) keep their own terms and are not
+redistributed here.

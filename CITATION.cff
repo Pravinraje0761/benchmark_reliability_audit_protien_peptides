@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this code or build on its findings, please cite it as below."
+title: "Benchmark Reliability Audit: Peptide Property Prediction (code)"
+type: software
+license: MIT
+repository-code: "https://github.com/Pravinraje0761/benchmark_reliability_audit_protien_peptides"
+keywords:
+  - peptide property prediction
+  - antimicrobial peptides
+  - benchmark reliability
+  - evaluation design
+  - data leakage
+  - rank agreement
+authors:
+  - given-names: "Pravin Raj"
+    family-names: "E"
+    email: "epravinraj0761@gmail.com"
