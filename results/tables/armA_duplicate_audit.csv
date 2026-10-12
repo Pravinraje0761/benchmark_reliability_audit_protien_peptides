@@ -1,0 +1,17 @@
+task,description,n_train,n_test,n_cross_split_duplicates,pct_of_test
+TTCA,tumour T-cell antigen,948,236,46,19.49
+AV,antiviral,4711,1177,117,9.94
+AOX,antioxidant,698,174,12,6.9
+ACE,ACE-inhibitory,1685,421,26,6.18
+DPPIV,DPP-IV inhibitory,1063,265,16,6.04
+MRSA,anti-MRSA,237,59,3,5.08
+APP,anti-parasitic,482,120,6,5.0
+ACP,anticancer,1378,344,15,4.36
+AB,antibacterial,13245,3311,77,2.33
+AF,antifungal,1591,395,8,2.03
+Neuro,neuropeptide,3881,969,10,1.03
+AMP,antimicrobial,10266,2566,0,0.0
+AMAP,anti-MAP,221,55,0,0.0
+BBP,blood-brain barrier,191,47,0,0.0
+QS,quorum sensing,349,87,0,0.0
+TOX,toxicity,3092,772,0,0.0

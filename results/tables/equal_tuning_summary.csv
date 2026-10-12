@@ -1,0 +1,2 @@
+tau_across_rules_fixed,tau_across_rules_tuned,tau_fixed_vs_tuned_mean,tau_fixed_vs_tuned_min,winner_changes,n_rules,mean_gain,threshold,seed
+0.5633333333333332,0.5866666666666667,0.8433333333333334,0.7833333333333333,3,5,0.004686783933920805,0.7,0

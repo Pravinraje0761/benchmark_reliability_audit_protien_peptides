@@ -1,0 +1,73 @@
+# Native protocol per benchmark, for Arm A. Fill during milestone M1 -- every
+# TODO here is a field that must be read out of the paper, not guessed.
+B1_genpept:
+  paper: "Pham et al. 2026, bioRxiv"
+  tasks: [amp_binary]
+  splits: TODO            # fixed files | procedure
+  clustering: {tool: TODO, threshold: TODO, coverage: TODO}
+  negative_rule: annotation_based_same_taxa
+  headline_metric: TODO
+  n_expected: 11000
+
+B2_qmap:
+  # ACQUIRED 2026-10-05. Values below are read off the package API, not guessed.
+  paper: "Lavertu et al. 2026, Scientific Reports"
+  package: qmap-benchmark==0.1.1
+  install: "pip install qmap-benchmark"
+  tasks: [mic_reg, hc50_reg]
+  splits: five_predefined          # QMAPBenchmark(split=0..4)
+  n_test_split0: 3650
+  training_pool: 18033             # DBAASPDataset()
+  leakage_control: train_set_filtering   # NOT corpus partitioning
+  clustering:
+    tool: blosum45_pairwise        # not MMseqs2
+    threshold: 0.6
+    gap_open: 5
+    gap_extension: 1
+    coverage: n/a                  # alignment-based, no coverage parameter
+  negative_rule: na_regression
+  headline_metric: per_target_regression   # bench.compute_metrics()
+  arm: A_only                      # native protocol is not reproducible by bra.splits
+  mic_species: "Escherichia coli"  # 2112/3650; alternatives S. aureus 2083, P. aeruginosa 1413
+  label_transform: log10
+  hc50_coverage: 536               # of 3650 -> exploratory only
+  preprocess_bra_canonical:
+    drop_non_L_canonical: true     # 1193 rows at split 0 (799 purely D-form)
+    collapse_duplicates: median    # 379 sequences collapsed
+    n_train_after: 7143
+    n_test_after: 1873
+
+B3_ppb:
+  paper: "Dong et al. 2026, bioRxiv"
+  tasks: [amp_binary, hemolysis_binary, mic_reg]
+  splits: both_random_and_homology     # internal control for the threshold factor
+  clustering: {tool: TODO, threshold: TODO, coverage: TODO}
+  negative_rule: inherited_per_dataset
+  headline_metric: TODO
+  n_expected: 161571
+
+B4_ampbenchmark:
+  paper: "Sidorczuk et al. 2022, Briefings in Bioinformatics"
+  tasks: [amp_binary]
+  splits: procedure
+  clustering: {tool: none_stated, threshold: null, coverage: null}
+  negative_rule: ELEVEN_VARIANTS       # the native levels of the negative factor
+  headline_metric: TODO
+
+B5_autopeptideml:
+  paper: "Fernandez-Diaz et al. 2024, Bioinformatics"
+  tasks: [amp_binary, hemolysis_binary]
+  splits: procedure
+  clustering: {tool: mmseqs2, threshold: TODO, coverage: TODO}
+  negative_rule: automated_drawing
+  headline_metric: TODO
+  source: "Zenodo static snapshot, not HEAD"
+
+B6_abp_framework:
+  paper: "Cisterna-Garcia et al. 2026, bioRxiv"
+  tasks: [amp_binary]
+  splits: TODO
+  clustering: {tool: TODO, threshold: TODO, coverage: TODO}
+  negative_rule: framework_specified
+  headline_metric: TODO
+  caution: "verify what is downloadable vs merely proposed"

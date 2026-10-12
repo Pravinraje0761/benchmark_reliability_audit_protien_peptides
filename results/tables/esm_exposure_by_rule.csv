@@ -1,0 +1,11 @@
+rule,klass,n,in_sprot,pct
+random_uniprot,positives,5187,410,7.904376325428957
+random_uniprot,negatives,5187,5187,100.0
+annotation_filtered,positives,5187,410,7.904376325428957
+annotation_filtered,negatives,5187,5187,100.0
+length_matched,positives,5187,410,7.904376325428957
+length_matched,negatives,5187,1,0.0192789666473877
+composition_matched,positives,5187,410,7.904376325428957
+composition_matched,negatives,5187,3,0.0578368999421631
+shuffled_positives,positives,5187,410,7.904376325428957
+shuffled_positives,negatives,5187,0,0.0

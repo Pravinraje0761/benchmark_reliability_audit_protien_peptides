@@ -1,0 +1,43 @@
+# Regenerable or non-redistributable data. The Arm B corpus derives from DBAASP
+# and UniProt, whose terms govern redistribution; reproduce.sh rebuilds it from
+# hashed inputs instead.
+data/
+*.parquet
+*.fasta
+*.fa
+*.tsv.gz
+results/runs/
+
+# Embedding caches: large, and keyed by sequence hash so they rebuild cheaply.
+**/embeddings/
+**/interim/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+*.egg-info/
+
+# LaTeX build artefacts. main.pdf and supplementary.pdf are tracked on purpose,
+# so the compiled paper is readable without a TeX install.
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.bbl
+*.blg
+
+# Editor and OS
+.obsidian/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Packaging artefacts produced for Overleaf uploads
+*.zip
