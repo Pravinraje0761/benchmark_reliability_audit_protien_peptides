@@ -96,7 +96,16 @@ python scripts/run_cluster_intervals.py
 say "9d. equal tuning budget (560 fits: 6 configs per learner + refit)"
 python scripts/run_equal_tuning.py
 
+say "9e. the six excluded Arm A datasets (720 fits, for cutoff sensitivity)"
+# Writes to runs/armA_excluded/, deliberately NOT runs/armA/, so the reported
+# ten-task result cannot be contaminated by the sensitivity analysis.
+python scripts/run_arm_a_excluded.py --stage all
+
+say "9f. export the exact train/test partitions (no model fits)"
+python scripts/export_splits.py
+
 python scripts/make_figures.py
+python scripts/make_paper_figures.py
 
 say "10. manuscript: substitute numbers, assemble, gate"
 # Numbers are substituted mechanically from the CSVs rather than transcribed by
