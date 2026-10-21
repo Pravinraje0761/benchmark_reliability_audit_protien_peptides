@@ -1,0 +1,44 @@
+{
+  "commit": "nogit",
+  "python": "3.12.15",
+  "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+  "packages": {
+    "numpy": "2.5.3",
+    "pandas": "3.0.6",
+    "sklearn": "1.9.1",
+    "torch": "2.14.1+cpu",
+    "scipy": "1.18.1"
+  },
+  "grid": {
+    "depths": [
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "activations": [
+      "relu",
+      "tanh",
+      "logistic",
+      "gelu"
+    ],
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  "paper": "Benchmark reliability audit (peptide property prediction)",
+  "arm": "A",
+  "tasks": [
+    "TOX"
+  ],
+  "representation": "esm2_35M",
+  "threshold": null,
+  "neg_rule": null,
+  "baseline_config": "hidden_layer_sizes=(256,), activation=relu -- the published configuration, run here as depth 1",
+  "caveat": "Supplementary sensitivity analysis. The main grid froze all hyperparameters before corpus construction; this sweep does not alter that and must not be merged into it."
+}

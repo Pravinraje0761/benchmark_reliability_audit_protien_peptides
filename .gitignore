@@ -11,6 +11,11 @@
 *.tsv.gz
 results/runs/
 
+# ...but the exported split definitions ARE a deliverable, not bulk data: they
+# are how a reader checks a rebuilt corpus matches ours before comparing any
+# number. Re-admit them past the blanket *.parquet rule above.
+!results/splits/*.parquet
+
 # Embedding caches: large, and keyed by sequence hash so they rebuild cheaply.
 **/embeddings/
 **/interim/

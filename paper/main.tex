@@ -60,8 +60,9 @@ designs. Arm~B fixes the task and varies the protocol: four clustering threshold
 $\times$ five negative-set rules $\times$ five seeds, on one harmonised antibacterial
 corpus (5{,}187 published positives; negatives drawn from reviewed UniProt under each
 rule). Arm~A reverses this, fixing the protocol and varying the biological task across ten
-datasets (52{,}316 sequences as released, 52{,}001 after removing 315 sequences duplicated
-across their own train/test split) drawn from \textbf{a single collection curated by one
+datasets (52{,}316 rows as released, 51{,}914 scored after removing the 402 test rows that
+carry the 315 sequences also present in training) drawn from \textbf{a single collection
+curated by one
 group with one homology-aware partitioning pipeline}, under their native partitions.
 Residual leakage and
 class balance were measured per cell rather than assumed; thresholds and a minimum
@@ -70,9 +71,10 @@ logged. Rank agreement and winner stability are each judged against a \emph{meas
 reproducibility ceiling from seed replicates rather than a nominal maximum.
 
 \noindent\textbf{Results.} The negative-set rule accounted for $71.0\%$ of the variance in
-reported MCC against $14.8\%$ for the pipeline: which negatives a benchmark invents matters
-more to its headline number than which model is run on it, and mean MCC spanned $0.31$ to
-$0.91$ across protocol cells. \textbf{Our primary hypothesis -- that leakage-controlled
+reported MCC against $14.8\%$ for the pipeline ($59.0\%$ against $4.9\%$ under the
+pre-registered splitter; the ordering is unchanged): which negatives a benchmark invents
+matters more to its headline number than which model is run on it, and mean MCC spanned
+$0.31$ to $0.91$ across protocol cells. \textbf{Our primary hypothesis -- that leakage-controlled
 protocols rank methods differently -- was not supported}: normalised agreement across the
 five negative-set rules was $0.881$ against a pre-specified threshold of $0.85$
 ($\tau_b = 0.727$). Broad ordering was comparatively stable while the identity of the
@@ -202,7 +204,8 @@ every deviation from it, including one that changes what H1 was tested over.
 \begin{enumerate}[leftmargin=1.4em,itemsep=2pt]
 \item \textbf{The negative-set rule, not the model, sets the reported number.} It accounts
   for $71.0\%$ of the variance in MCC against $14.8\%$ for the pipeline, from exact
-  method-of-moments variance components on a complete balanced factorial. All
+  method-of-moments variance components on a complete balanced factorial, with
+  delete-one-seed jackknife intervals and both splitters reported. All
   protocol-attributable \emph{reordering} is carried by the pipeline-by-protocol
   interaction, in which the negative rule outweighs the clustering threshold sevenfold.
 \item \textbf{Task transfer is the larger problem.} Rank agreement is lower across the ten
@@ -805,11 +808,48 @@ left unstandardised the factor that is not.
 Table~\ref{tab:variance} decomposes the MCC of the complete balanced factorial
 (16 pipelines $\times$ 5 rules $\times$ 4 thresholds $\times$ 5 seeds, one observation per
 cell) two ways. The negative-set rule is the largest single component on either measure:
-$\hat\sigma^2 = 0.0467$, \textbf{71.0\%} of the total estimated variance, against
-$14.8\%$ for the pipeline itself. \textbf{Which negatives a benchmark invents matters more
-to the number it reports than which model is run on it.} The clustering threshold accounts
-for $0.6\%$ and the seed for a component estimated at $-1\times10^{-6}$,
-i.e.\ indistinguishable from zero.
+$\hat\sigma^2 = 0.0467$, \textbf{71.0\%} of the total estimated variance
+(delete-one-seed jackknife 95\% CI $[70.6, 71.3]$), against $14.8\%$ $[14.6, 15.0]$ for the
+pipeline itself. \textbf{Which negatives a benchmark invents matters more to the number it
+reports than which model is run on it.} The clustering threshold accounts for $0.6\%$
+$[0.5, 0.7]$ and the seed for a component estimated at $-1\times10^{-6}$, i.e.\
+indistinguishable from zero.
+
+\paragraph{Which grid this is computed on, and why it matters.} The figures above are from
+the \textbf{balance-preserving} grid. We flag that because the pre-registered grid splits
+the same total differently:
+
+\begin{center}\small
+\begin{tabular}{lcc}
+\toprule
+Component & balance-preserving & pre-registered (largest-first) \\
+\midrule
+negative rule          & \textbf{71.0\%} $[70.6, 71.3]$ & 59.0\% $[57.8, 60.1]$ \\
+clustering threshold   & 0.6\% $[0.5, 0.7]$            & \textbf{14.9\%} $[14.6, 15.2]$ \\
+pipeline               & 14.8\% $[14.6, 15.0]$         & 4.9\% $[4.6, 5.1]$ \\
+pipeline $\times$ rule & 11.0\% $[10.8, 11.3]$         & 0.8\% $[0.7, 0.9]$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent Under the pre-registered splitter the clustering threshold looks like a major
+source of score variance. It is not: it is the class-balance artefact of
+Section~\ref{sec:artefacts} in disguise. Largest-first assignment makes the test positive
+fraction depend strongly on the threshold ($0.29$ to $0.99$), and MCC depends strongly on
+that fraction -- across the 100 pre-registered cells the correlation between test positive
+fraction and mean MCC is $r = -0.887$. Most of the threshold's apparent $14.9\%$ is
+therefore the metric responding to a corrupted class ratio rather than to a genuinely
+different partition. Removing the artefact removes the component, which is why the
+balance-preserving grid attributes $0.6\%$ to the threshold and is the more interpretable
+decomposition of the two.
+
+Both are reported because the balance-preserving grid is post hoc
+(Section~\ref{sec:artefacts}) and this is a headline number. The substantive conclusion --
+that the negative-set rule is the dominant single determinant of a reported score -- holds
+either way, at $71.0\%$ or $59.0\%$. What is \emph{not} robust across the two is the claim
+that the clustering threshold contributes nothing to the score: that holds only once class
+balance is repaired, and the honest statement is that the threshold's influence on the
+score runs almost entirely through class balance.
 
 The two columns are different estimators of the same thing and agree closely, which is why
 we show both. Moment-based variance components put each factor on a common footing
